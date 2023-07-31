@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { DevSupport } from "@react-buddy/ide-toolbox";
-// import { ComponentPreviews, useInitial } from "./dev";
+import { ComponentPreviews, useInitial } from "./dev";
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 
