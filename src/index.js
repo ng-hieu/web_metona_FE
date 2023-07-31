@@ -17,7 +17,7 @@ root.render(
       <DevSupport ComponentPreviews={ComponentPreviews}
         useInitialHook={useInitial}
       >
-        <App />
+ 
       </DevSupport>
     </Provider>
   </React.StrictMode>
