@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import ThemeProvider from "./theme";
 import { HelmetProvider } from "react-helmet-async";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
