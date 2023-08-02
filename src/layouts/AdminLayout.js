@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-  import Divider from '@mui/material/Divider';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -18,6 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { Outlet } from 'react-router-dom';
+import { Avatar, Grid, Stack, Typography } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -82,7 +83,7 @@ export default function AdminLayout() {
         <>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
-                <AppBar position="fixed" open={open}>
+                <AppBar position="fixed" open={open} sx={{ backgroundColor: theme.palette.primary.main }}>
                     <Toolbar>
                         <IconButton
                             color="inherit"
@@ -93,9 +94,9 @@ export default function AdminLayout() {
                         >
                             <MenuIcon />
                         </IconButton>
-                        {/* <Typography variant="h6" noWrap component="div">
-                            Persistent drawer
-                        </Typography> */}
+                        <Typography variant="h6" noWrap component="div">
+                            Admin Pages
+                        </Typography>
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -112,9 +113,18 @@ export default function AdminLayout() {
                     open={open}
                 >
                     <DrawerHeader>
-                        <IconButton onClick={handleDrawerClose}>
-                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                        </IconButton>
+                        <Grid container spacing={2}>
+                            <Grid item xs={8}>
+                                <Stack direction="row" spacing={2}>
+                                    <Avatar alt="Cindy Baker" src="./assets/image/logo.png" sx={{ width: 60, height: 60 }} />
+                                </Stack>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <IconButton onClick={handleDrawerClose} sx={{ top: '10px', left: '30px' }}>
+                                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                                </IconButton>
+                            </Grid>
+                        </Grid>
                     </DrawerHeader>
                     <Divider />
                     <List>
