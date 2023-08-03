@@ -16,7 +16,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { Outlet } from 'react-router-dom';
 import { Avatar, Grid, Stack, Typography } from '@mui/material';
 
@@ -116,7 +115,7 @@ export default function AdminLayout() {
                         <Grid container spacing={2}>
                             <Grid item xs={8}>
                                 <Stack direction="row" spacing={2}>
-                                    <Avatar alt="Cindy Baker" src="./assets/image/logo.png" sx={{ width: 60, height: 60 }} />
+                                    <Avatar alt="Metona" src='https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' sx={{ width: 60, height: 60 }} />
                                 </Stack>
                             </Grid>
                             <Grid item xs={4}>
@@ -128,29 +127,14 @@ export default function AdminLayout() {
                     </DrawerHeader>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
-                    <Divider />
-                    <List>
-                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
+                        <ListItem >
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <InboxIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Inbox" />
+                            </ListItemButton>
+                        </ListItem>
                     </List>
                 </Drawer>
                 <Main open={open}>
