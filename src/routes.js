@@ -1,16 +1,18 @@
 import { useSelector } from 'react-redux';
 import AdminLayout from './layouts/AdminLayout'
 import { Navigate, useRoutes, useSearchParams } from 'react-router-dom';
-import LoginForm from './components/forms/admin/LoginForm';
-
-
+import { ChildCare } from '@mui/icons-material';
+import { chipClasses } from '@mui/material';
+import AdminHome from './components/showProduct/AdminHome';
 
 export default function Router() {
     return useRoutes([
         {
-            
             path: 'admin',
-            element: <AdminLayout/>
+            element: <AdminLayout/>,
+            children: [
+                { path: 'home', element: <AdminHome/>}
+            ]
         }
     ])
 }
