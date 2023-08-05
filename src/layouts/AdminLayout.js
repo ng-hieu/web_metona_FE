@@ -15,9 +15,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Outlet } from 'react-router-dom';
 import { Avatar, Grid, Stack, Typography } from '@mui/material';
+import CategoryTwoToneIcon from '@mui/icons-material/CategoryTwoTone'; import { Outlet } from 'react-router-dom';
+import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
+import ListAltTwoToneIcon from '@mui/icons-material/ListAltTwoTone';
+import ProductionQuantityLimitsTwoToneIcon from '@mui/icons-material/ProductionQuantityLimitsTwoTone';
 
 const drawerWidth = 240;
 
@@ -79,7 +81,7 @@ export default function AdminLayout() {
     };
 
     const arrFeatures = ['Xem ngành hàng', 'Xem sản phẩm', 'Kiểm tra đơn hàng', 'Tra cứu khách hàng']
-    const arrIcon = [<InboxIcon />, <InboxIcon />, <InboxIcon />]
+    const arrIcon = [<CategoryTwoToneIcon />, <ListAltTwoToneIcon />, <ProductionQuantityLimitsTwoToneIcon />, <PersonSearchTwoToneIcon />]
 
     return (
         <>
