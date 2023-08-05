@@ -525,10 +525,10 @@ export default function ProductHome() {
                     {/* <FormControl fullWidth>
                         <Field
                             component={Select}
-                            id="type"
-                            name="type"
-                            labelId="age-simple"
-                            label="Loại câu hỏi"
+                            id="category"
+                            name="categoryId"
+                            labelId="category"
+                            label="Ngành hàng"
                         >
                             {category.map((item) => (
                                 <MenuItem value={item.id}>{item.name}</MenuItem>
@@ -655,10 +655,10 @@ export default function ProductHome() {
                     {/* <FormControl fullWidth>
                         <Field
                             component={Select}
-                            id="type"
-                            name="type"
-                            labelId="age-simple"
-                            label="Loại câu hỏi"
+                            id="category"
+                            name="categoryId"
+                            labelId="category"
+                            label="Ngành hàng"
                         >
                             {category.map((item) => (
                                 <MenuItem value={item.id}>{item.name}</MenuItem>
