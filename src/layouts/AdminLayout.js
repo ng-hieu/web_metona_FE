@@ -78,6 +78,9 @@ export default function AdminLayout() {
         setOpen(false);
     };
 
+    const arrFeatures = ['Xem ngành hàng', 'Xem sản phẩm', 'Kiểm tra đơn hàng', 'Tra cứu khách hàng']
+    const arrIcon = [<InboxIcon />, <InboxIcon />, <InboxIcon />]
+
     return (
         <>
             <Box sx={{ display: 'flex' }}>
@@ -127,14 +130,16 @@ export default function AdminLayout() {
                     </DrawerHeader>
                     <Divider />
                     <List>
-                        <ListItem >
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <InboxIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Inbox" />
-                            </ListItemButton>
-                        </ListItem>
+                        {arrFeatures.map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        {arrIcon[index]}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
                     </List>
                 </Drawer>
                 <Main open={open}>

@@ -14,9 +14,9 @@ function App() {
       <HelmetProvider>
         <BrowserRouter>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <SimpleBar style={{ maxHeight: "100vh" }}>
+            {/* <SimpleBar style={{ maxHeight: "100vh" }}> */}
               <Router />
-            </SimpleBar>
+            {/* </SimpleBar> */}
           </LocalizationProvider>
         </BrowserRouter>
       </HelmetProvider>
