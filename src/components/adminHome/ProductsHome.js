@@ -15,6 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import { Field, Form, Formik } from "formik";
+import MoreVertIcon from '@mui/icons-material/MoreVert'; 
 import {
     Box,
     Button,
@@ -24,6 +25,7 @@ import {
     DialogContentText,
     DialogTitle,
     FormControl,
+    IconButton,
     MenuItem,
     Select,
     TextField,
@@ -70,42 +72,28 @@ const columns = [
     }
 ];
 
-function createData(id, name, price, quantity, category, description, action) {
-    return { id, name, price, quantity, category, description, action };
-}
-
 const rows = [
-    createData(1, 'India', 21213332, 1324171354, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(2, 'China', 345354253, 1403500365, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(3, 'Italy', 12125454354, 60483973, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(4, 'United States', 235243534345, 327167434, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(5, 'Canada', 23455233524, 37602103, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(6, 'Australia', 6745677457, 25475400, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(7, 'Germany', 432432454, 83019200, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(8, 'Ireland', 4453534, 4857000, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(9, 'Mexico', 354566, 126577691, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(10, 'Japan', 7675567, 126317000, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(11, 'France', 675765445, 67022000, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(12, 'United Kingdom', 235234, 67545757, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
-    createData(13, 'Russia', 5544, 146793744, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
-    createData(14, 'Nigeria', 232334, 200962417, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
-    createData(15, 'Brazil', 32543543, 210147125, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
-    createData(16, 'India', 21213332, 1324171354, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(17, 'China', 345354253, 1403500365, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(18, 'Italy', 12125454354, 60483973, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(19, 'United States', 235243534345, 327167434, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(20, 'Canada', 23455233524, 37602103, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(21, 'Australia', 6745677457, 25475400, 'Điện thoại', 'Đẹp', 'Dùng Dialog'),
-    createData(22, 'Germany', 432432454, 83019200, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(23, 'Ireland', 4453534, 4857000, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(24, 'Mexico', 354566, 126577691, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(25, 'Japan', 7675567, 126317000, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(26, 'France', 675765445, 67022000, 'Máy tính', 'Đẹp', 'Dùng Dialog'),
-    createData(27, 'United Kingdom', 235234, 67545757, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
-    createData(28, 'Russia', 5544, 146793744, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
-    createData(29, 'Nigeria', 232334, 200962417, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
-    createData(30, 'Brazil', 32543543, 210147125, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
-];
+    { id: 1, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 2, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 3, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 4, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 5, name: 'Canada', price: 23455233524, quantity: 37602103, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 6, name: 'Australia', price: 6745677457, quantity: 25475400, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 7, name: 'Germany', price: 432432454, quantity: 83019200, category: 'Máy tính', description: 'Đẹp' },
+    { id: 8, name: 'Ireland', price: 4453534, quantity: 4857000, category: 'Máy tính', description: 'Đẹp' },
+    { id: 9, name: 'Mexico', price: 354566, quantity: 126577691, category: 'Máy tính', description: 'Đẹp' },
+    { id: 10, name: 'Japan', price: 7675567, quantity: 126317000, category: 'Máy tính', description: 'Đẹp' },
+    { id: 11, name: 'France', price: 675765445, quantity: 67022000, category: 'Máy tính', description: 'Đẹp' },
+    { id: 12, name: 'United Kingdom', price: 235234, quantity: 67545757, category: 'Sạc pin', description: 'Đẹp' },
+    { id: 13, name: 'Russia', price: 5544, quantity: 146793744, category: 'Sạc pin', description: 'Đẹp' },
+    { id: 14, name: 'Nigeria', price: 232334, quantity: 200962417, category: 'Sạc pin', description: 'Đẹp' },
+    { id: 15, name: 'Brazil', price: 32543543, quantity: 210147125, category: 'Sạc pin', description: 'Đẹp' },
+    { id: 16, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 17, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 18, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', description: 'Đẹp' },
+    { id: 19, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', description: 'Đẹp' }
+]
+
 
 export default function ProductsHome() {
     const theme = useTheme();
@@ -161,7 +149,7 @@ export default function ProductsHome() {
         setOpenDeleteProduct(false);
     };
 
-   
+
     React.useEffect(() => {
         customAPIv1()
             .get(`products`)
@@ -213,24 +201,52 @@ export default function ProductsHome() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row) => {
-                                    return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                            {columns.map((column) => {
-                                                const value = row[column.id];
-                                                return (
-                                                    <TableCell key={column.id} align={column.align}>
-                                                        {column.format && typeof value === 'number'
-                                                            ? column.format(value)
-                                                            : value}
-                                                    </TableCell>
-                                                );
-                                            })}
-                                        </TableRow>
-                                    );
-                                })}
+                            {rows.map((obj) => {
+                                const { id,
+                                    name,
+                                    price,
+                                    quantity,
+                                    category,
+                                    description } = obj;
+                                return (
+                                    <TableRow>
+                                        <TableCell>
+                                            {id}
+                                        </TableCell>
+                                        <TableCell>
+                                            {name}
+                                        </TableCell>
+                                        <TableCell>
+                                            {price}
+                                        </TableCell>
+                                        <TableCell>
+                                            {quantity}
+                                        </TableCell>
+                                        <TableCell>
+                                            {category}
+                                        </TableCell>
+                                        <TableCell>
+                                            {description}
+                                        </TableCell>
+                                        <TableCell>
+                                            <IconButton
+                                                size="large"
+                                                color="inherit"
+                                                // onClick={(e) => {
+                                                //     setCurrentTag(
+                                                //         id
+                                                //     );
+                                                //     handleOpenMenu(
+                                                //         e
+                                                //     );
+                                                // }}
+                                            >
+                                                <MoreVertIcon fontSize="small" />
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            })}
                         </TableBody>
                     </Table>
                 </TableContainer>
