@@ -28,6 +28,8 @@ import {
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { customAPIv1 } from "../../features/APIv1/customAPI";
+import AddProductForm from "../forms/admin/AddProductForm";
+import EditProductForm from "../forms/admin/EditProductForm";
 
 const columns = [
     { id: "id", label: "ID", minWidth: 50 },
@@ -388,6 +390,7 @@ export default function ProductHome() {
             });
     }, []);
 
+
     React.useEffect(() => {
         customAPIv1()
             .get(`categorys`)
@@ -482,72 +485,9 @@ export default function ProductHome() {
                 maxWidth={"md"}
             >
                 <DialogTitle>Thêm một sản phẩm mới</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Tên sản phẩm"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="price"
-                        label="Giá sản phẩm"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="quantityProduct"
-                        label="Số lượng"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="description"
-                        label="Chi tiết sản phẩm "
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-                    {/* <FormControl fullWidth>
-                        <Field
-                            component={Select}
-                            id="category"
-                            name="categoryId"
-                            labelId="category"
-                            label="Ngành hàng"
-                        >
-                            {category.map((item) => (
-                                <MenuItem value={item.id}>{item.name}</MenuItem>
-                            ))}
-                        </Field>
-                    </FormControl> */}
-                    <Box
-                        noValidate
-                        component="form"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            m: "auto",
-                            width: "fit-content",
-                        }}
-                    ></Box>
-                </DialogContent>
+                <AddProductForm></AddProductForm>
                 <DialogActions>
-                    <Button onClick={openAddProduct}>Close</Button>
+                    <Button onClick={handleCloseAddProduct}>Close</Button>
                 </DialogActions>
             </Dialog>
 
@@ -612,73 +552,9 @@ export default function ProductHome() {
                 maxWidth={"md"}
             >
                 <DialogTitle>Nhập dữ liệu sản phẩm để sửa </DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Tên sản phẩm"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="price"
-                        label="Giá sản phẩm"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="quantityProduct"
-                        label="Số lượng"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="description"
-                        label="Chi tiết sản phẩm "
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-                    {/* <FormControl fullWidth>
-                        <Field
-                            component={Select}
-                            id="category"
-                            name="categoryId"
-                            labelId="category"
-                            label="Ngành hàng"
-                        >
-                            {category.map((item) => (
-                                <MenuItem value={item.id}>{item.name}</MenuItem>
-                            ))}
-                        </Field>
-                    </FormControl> */}
-
-                    <Box
-                        noValidate
-                        component="form"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            m: "auto",
-                            width: "fit-content",
-                        }}
-                    ></Box>
-                </DialogContent>
+                <EditProductForm></EditProductForm>
                 <DialogActions>
-                    <Button onClick={openEditProduct}>Close</Button>
+                    <Button onClick={handleCloseEditProduct}>Close</Button>
                 </DialogActions>
             </Dialog>
         </>
