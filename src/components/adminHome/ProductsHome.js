@@ -7,10 +7,28 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
 import Typography from "@mui/material/Typography";
 import { useTheme } from '@emotion/react';
-
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
+import CheckIcon from "@mui/icons-material/Check";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import CloseIcon from "@mui/icons-material/Close";
+import { Field, Form, Formik } from "formik";
+import {
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    FormControl,
+    MenuItem,
+    Select,
+    TextField,
+} from "@mui/material";
+import { customAPIv1 } from "../../features/APIv1/customAPI";
 
 const columns = [
     { id: 'id', label: 'ID', minWidth: 50 },
@@ -103,10 +121,81 @@ export default function ProductsHome() {
         setPage(0);
     };
 
+    React.useState(10);
+    const [openAddProduct, setOpenAddProduct] = React.useState(false);
+    const [openEditProduct, setOpenEditProduct] = React.useState(false);
+    const [openActionProduct, setOpenActionProduct] = React.useState(false);
+    const [openDeleteProduct, setOpenDeleteProduct] = React.useState(false);
+    const [selectedValue, setSelectedValue] = React.useState("");
+    const [listProducts, setListProducts] = React.useState([]);
+    const [category, setCategory] = React.useState([]);
+
+    const handleChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
+
+
+    const handleClickOpenAddProduct = () => {
+        setOpenAddProduct(true);
+    };
+    const handleClickOpenActionProduct = () => {
+        setOpenActionProduct(true);
+    };
+    const handleClickOpenEditProduct = () => {
+        setOpenEditProduct(true);
+    };
+    const handleClickOpenDeleteProduct = () => {
+        setOpenDeleteProduct(true);
+    };
+
+    const handleCloseAddProduct = () => {
+        setOpenAddProduct(false);
+    };
+    const handleCloseEditProduct = () => {
+        setOpenEditProduct(false);
+    };
+    const handleCloseActionProduct = () => {
+        setOpenActionProduct(false);
+    };
+    const handleCloseDeleteProduct = () => {
+        setOpenDeleteProduct(false);
+    };
+
+   
+    React.useEffect(() => {
+        customAPIv1()
+            .get(`products`)
+            .then((res) => {
+                setListProducts(res.data);
+                console.log("products details:", res.data);
+            })
+            .catch((e) => {
+                console.log("error in get products details:", e);
+            });
+    }, []);
+
+    React.useEffect(() => {
+        customAPIv1()
+            .get(`categorys`)
+            .then((res) => {
+                console.log("categotys details:", res.data);
+                setCategory(
+                    res.data.data.map((item) => {
+                        return {
+                            name: item.name,
+                            id: item.id,
+                        };
+                    })
+                );
+            })
+            .catch((e) => {
+                console.log("error in get category details:", e);
+            });
+    }, []);
     return (
         <>
             <Typography variant='h3' sx={{ width: '13vw', "marginLeft": "auto", "marginRight": "auto", color: theme.palette.primary.main }}>Bảng Sản Phẩm</Typography>
-            <Button sx={{border:`1px solid ${theme.palette.primary.main}`}}>Thêm sản phẩm</Button>
+            <Button sx={{ border: `1px solid ${theme.palette.primary.main}` }} onClick={handleClickOpenAddProduct}>Thêm sản phẩm</Button>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 700 }}>
                     <Table stickyHeader aria-label="sticky table">
@@ -155,6 +244,211 @@ export default function ProductsHome() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
+            <Dialog
+                open={openAddProduct}
+                onClose={handleCloseAddProduct}
+                maxWidth={"md"}
+            >
+                <DialogTitle>Thêm một sản phẩm mới</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Tên sản phẩm"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="price"
+                        label="Giá sản phẩm"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="quantityProduct"
+                        label="Số lượng"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="description"
+                        label="Chi tiết sản phẩm "
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+                    {/* <FormControl fullWidth>
+                        <Field
+                            component={Select}
+                            id="type"
+                            name="type"
+                            labelId="age-simple"
+                            label="Loại câu hỏi"
+                        >
+                            {category.map((item) => (
+                                <MenuItem value={item.id}>{item.name}</MenuItem>
+                            ))}
+                        </Field>
+                    </FormControl> */}
+                    <Box
+                        noValidate
+                        component="form"
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            m: "auto",
+                            width: "fit-content",
+                        }}
+                    ></Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseAddProduct}>Close</Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog
+                open={openActionProduct}
+                onClose={handleCloseActionProduct}
+                maxWidth={"md"}
+            >
+                <DialogTitle>Lựa chọn hành động</DialogTitle>
+                <DialogContentText>
+                    <CheckIcon></CheckIcon>Nhập dữ liệu để sửa sản phẩm.
+                </DialogContentText>
+                <DialogContentText>
+                    <ReportProblemIcon></ReportProblemIcon>Xóa sản phẩm sẽ không
+                    thể hoàn tác.
+                </DialogContentText>
+                <DialogActions>
+                    <Button
+                        variant="outlined"
+                        startIcon={<DriveFileRenameOutlineIcon />}
+                        sx={{
+                            pr: 4,
+                        }}
+                    >
+                        Sửa sản phẩm
+                    </Button>
+                    <Button variant="outlined" startIcon={<DeleteIcon />}>
+                        Xóa
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog
+                open={openDeleteProduct}
+                onClose={handleCloseDeleteProduct}
+                maxWidth={"md"}
+            >
+                <DialogTitle>Xóa sản phẩm</DialogTitle>
+                <DialogContentText>
+                    <ReportProblemIcon></ReportProblemIcon>Xóa sản phẩm sẽ không
+                    thể hoàn tác.
+                </DialogContentText>
+                <DialogActions>
+                    <Button
+                        variant="outlined"
+                        startIcon={<CheckIcon />}
+                        sx={{
+                            pr: 4,
+                        }}
+                    >
+                        Xóa
+                    </Button>
+                    <Button variant="outlined" startIcon={<CloseIcon />}>
+                        Không
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog
+                open={openEditProduct}
+                onClose={handleCloseEditProduct}
+                maxWidth={"md"}
+            >
+                <DialogTitle>Nhập dữ liệu sản phẩm để sửa </DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Tên sản phẩm"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="price"
+                        label="Giá sản phẩm"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="quantityProduct"
+                        label="Số lượng"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="description"
+                        label="Chi tiết sản phẩm "
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+                    {/* <FormControl fullWidth>
+                        <Field
+                            component={Select}
+                            id="type"
+                            name="type"
+                            labelId="age-simple"
+                            label="Loại câu hỏi"
+                        >
+                            {category.map((item) => (
+                                <MenuItem value={item.id}>{item.name}</MenuItem>
+                            ))}
+                        </Field>
+                    </FormControl> */}
+
+                    <Box
+                        noValidate
+                        component="form"
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            m: "auto",
+                            width: "fit-content",
+                        }}
+                    ></Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={openEditProduct}>Close</Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }
