@@ -9,6 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
 import Typography from "@mui/material/Typography";
+import { useTheme } from '@emotion/react';
 
 
 const columns = [
@@ -88,7 +89,8 @@ const rows = [
     createData(30, 'Brazil', 32543543, 210147125, 'Sạc pin', 'Đẹp', 'Dùng Dialog'),
 ];
 
-export default function ProductHome() {
+export default function ProductsHome() {
+    const theme = useTheme();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -103,8 +105,8 @@ export default function ProductHome() {
 
     return (
         <>
-            <Typography variant='h3' sx={{ width: '13vw' }}>Bảng Sản Phẩm</Typography>
-            <Button>Thêm sản phẩm</Button>
+            <Typography variant='h3' sx={{ width: '13vw', "marginLeft": "auto", "marginRight": "auto", color: theme.palette.primary.main }}>Bảng Sản Phẩm</Typography>
+            <Button sx={{border:`1px solid ${theme.palette.primary.main}`}}>Thêm sản phẩm</Button>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 700 }}>
                     <Table stickyHeader aria-label="sticky table">
