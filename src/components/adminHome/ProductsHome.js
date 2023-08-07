@@ -1,21 +1,21 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Typography from "@mui/material/Typography";
-import { useTheme } from '@emotion/react';
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import { Field, Form, Formik } from "formik";
-import MoreVertIcon from '@mui/icons-material/MoreVert'; 
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AddProductForm from '../forms/admin/AddProductForm';
+import EditProductForm from "../forms/admin/EditProductForm";
 import {
     Box,
     Button,
@@ -30,86 +30,88 @@ import {
     Select,
     TextField,
 } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { customAPIv1 } from "../../features/APIv1/customAPI";
+import { useTheme } from "@emotion/react";
 
 const columns = [
-    { id: 'id', label: 'ID', minWidth: 50 },
-    { id: 'name', label: 'Tên sản phẩm', minWidth: 120 },
+    { id: "id", label: "ID", minWidth: 50 },
     {
-        id: 'price',
-        label: 'Giá sản phẩm',
-        minWidth: 100,
-        align: 'left',
-        format: (value) => value.toLocaleString(),
+        id: "image",
+        label: "Ảnh sản phẩm",
+        minWidth: 150,
+        align: "left",
     },
+    { id: "name", label: "Tên sản phẩm", minWidth: 200 },
     {
-        id: 'quantity',
-        label: 'Số lượng',
-        minWidth: 100,
-        align: 'left',
-        format: (value) => value.toLocaleString(),
-    },
-    {
-        id: 'category',
-        label: 'Ngành hàng',
-        minWidth: 100,
-        align: 'left',
-
-    },
-    {
-        id: 'description',
-        label: 'Mô tả',
+        id: "price",
+        label: "Giá sản phẩm",
         minWidth: 200,
-        align: 'left',
-
+        align: "left",
+        format: (value) => value.toLocaleString(),
     },
     {
-        id: 'action',
-        label: 'Hành động',
+        id: "quantity",
+        label: "Số lượng",
+        minWidth: 200,
+        align: "left",
+        format: (value) => value.toLocaleString(),
+    },
+    {
+        id: "category",
+        label: "Ngành hàng",
+        minWidth: 200,
+        align: "left",
+    },
+    {
+        id: "description",
+        label: "Mô tả",
+        minWidth: 300,
+        maxWidth:400,
+        align: "left",
+    },
+    {
+        id: "status",
+        label: "Tình trạng sản phẩm",
         minWidth: 100,
-        align: 'left',
-
-    }
+        align: "left",
+    },
+    {
+        id: "action",
+        label: "Hành động",
+        minWidth: 100,
+        align: "left",
+    },
 ];
 
 const rows = [
-    { id: 1, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 2, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 3, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 4, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 5, name: 'Canada', price: 23455233524, quantity: 37602103, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 6, name: 'Australia', price: 6745677457, quantity: 25475400, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 7, name: 'Germany', price: 432432454, quantity: 83019200, category: 'Máy tính', description: 'Đẹp' },
-    { id: 8, name: 'Ireland', price: 4453534, quantity: 4857000, category: 'Máy tính', description: 'Đẹp' },
-    { id: 9, name: 'Mexico', price: 354566, quantity: 126577691, category: 'Máy tính', description: 'Đẹp' },
-    { id: 10, name: 'Japan', price: 7675567, quantity: 126317000, category: 'Máy tính', description: 'Đẹp' },
-    { id: 11, name: 'France', price: 675765445, quantity: 67022000, category: 'Máy tính', description: 'Đẹp' },
-    { id: 12, name: 'United Kingdom', price: 235234, quantity: 67545757, category: 'Sạc pin', description: 'Đẹp' },
-    { id: 13, name: 'Russia', price: 5544, quantity: 146793744, category: 'Sạc pin', description: 'Đẹp' },
-    { id: 14, name: 'Nigeria', price: 232334, quantity: 200962417, category: 'Sạc pin', description: 'Đẹp' },
-    { id: 15, name: 'Brazil', price: 32543543, quantity: 210147125, category: 'Sạc pin', description: 'Đẹp' },
-    { id: 16, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 17, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 18, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', description: 'Đẹp' },
-    { id: 19, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', description: 'Đẹp' }
+    { id: 1, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'ádas1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111ádagsdasdad ádasdasd á ádasdasdsdfsdsdf sdf sdf sd fs df sdf sd fs df sdf s dfs df sdf sd fs dfs df sdf sd fs df sdf á d ád a sdasdasdaksldnasdfhslidfhalsdifasdf ádfsdfa <hr>  ádasdasdasdasdhjajsdabsdjasbdjabsdj kas ádja sads ádasdasdasdasdasdasdasddddddddddddddddddddddddđqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad' },
+    { id: 2, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', status:"cần thêm sản phẩm", image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 3, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 4, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 5, name: 'Canada', price: 23455233524, quantity: 37602103, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 6, name: 'Australia', price: 6745677457, quantity: 25475400, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 7, name: 'Germany', price: 432432454, quantity: 83019200, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 8, name: 'Ireland', price: 4453534, quantity: 4857000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 9, name: 'Mexico', price: 354566, quantity: 126577691, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 10, name: 'Japan', price: 7675567, quantity: 126317000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 11, name: 'France', price: 675765445, quantity: 67022000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 12, name: 'United Kingdom', price: 235234, quantity: 67545757, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 13, name: 'Russia', price: 5544, quantity: 146793744, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 14, name: 'Nigeria', price: 232334, quantity: 200962417, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 15, name: 'Brazil', price: 32543543, quantity: 210147125, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 16, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 17, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 18, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
+    { id: 19, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' }
 ]
 
-
-export default function ProductsHome() {
+export default function ProductHome() {
     const theme = useTheme();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
 
     React.useState(10);
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [openAddProduct, setOpenAddProduct] = React.useState(false);
     const [openEditProduct, setOpenEditProduct] = React.useState(false);
     const [openActionProduct, setOpenActionProduct] = React.useState(false);
@@ -117,11 +119,9 @@ export default function ProductsHome() {
     const [selectedValue, setSelectedValue] = React.useState("");
     const [listProducts, setListProducts] = React.useState([]);
     const [category, setCategory] = React.useState([]);
-
-    const handleChange = (event) => {
-        setSelectedValue(event.target.value);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
     };
-
 
     const handleClickOpenAddProduct = () => {
         setOpenAddProduct(true);
@@ -149,6 +149,14 @@ export default function ProductsHome() {
         setOpenDeleteProduct(false);
     };
 
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
+    const handleChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
 
     React.useEffect(() => {
         customAPIv1()
@@ -184,7 +192,7 @@ export default function ProductsHome() {
         <>
             <Typography variant='h3' sx={{ width: '13vw', "marginLeft": "auto", "marginRight": "auto", color: theme.palette.primary.main }}>Bảng Sản Phẩm</Typography>
             <Button sx={{ border: `1px solid ${theme.palette.primary.main}` }} onClick={handleClickOpenAddProduct}>Thêm sản phẩm</Button>
-            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            <Paper sx={{ width: "97vw", overflow: "hidden" }}>
                 <TableContainer sx={{ maxHeight: 700 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -193,7 +201,17 @@ export default function ProductsHome() {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{ minWidth: column.minWidth }}
+                                        style={{
+                                            minWidth:
+                                                column.minWidth,
+                                            maxWidth: column.maxWidth,
+                                            backgroundColor:
+                                                theme.palette
+                                                    .primary.dark,
+                                            color: theme.palette
+                                                .primary
+                                                .contrastText,
+                                        }}
                                     >
                                         {column.label}
                                     </TableCell>
@@ -201,37 +219,63 @@ export default function ProductsHome() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((obj) => {
-                                const { id,
-                                    name,
-                                    price,
-                                    quantity,
-                                    category,
-                                    description } = obj;
-                                return (
-                                    <TableRow>
-                                        <TableCell>
-                                            {id}
-                                        </TableCell>
-                                        <TableCell>
-                                            {name}
-                                        </TableCell>
-                                        <TableCell>
-                                            {price}
-                                        </TableCell>
-                                        <TableCell>
-                                            {quantity}
-                                        </TableCell>
-                                        <TableCell>
-                                            {category}
-                                        </TableCell>
-                                        <TableCell>
-                                            {description}
-                                        </TableCell>
-                                        <TableCell>
-                                            <IconButton
-                                                size="large"
-                                                color="inherit"
+                            {rows
+                                .slice(
+                                    page * rowsPerPage,
+                                    page * rowsPerPage + rowsPerPage
+                                )
+                                .map((obj) => {
+                                    const { id,
+                                        image,
+                                        name,
+                                        price,
+                                        quantity,
+                                        category,
+                                        description,
+                                        status,
+                                     } = obj;
+                                    return (
+                                        <TableRow>
+                                            <TableCell>
+                                                {id}
+                                            </TableCell>
+                                            <TableCell>
+                                                <img src={image} width="100" height="100" />
+                                            </TableCell>
+                                            <TableCell>
+                                                {name}
+                                            </TableCell>
+                                            <TableCell>
+                                                {price}
+                                            </TableCell>
+                                            <TableCell>
+                                                {quantity}
+                                            </TableCell>
+                                            <TableCell>
+                                                {category}
+                                            </TableCell>
+                                            <TableCell>
+                                                <Typography sx={{
+                                                    "display": "-webkit-box",
+                                                    "maxHeight": "3.2rem",
+                                                    "maxWidth": "300px",
+                                                    "WebkitBoxOrient": "vertical",
+                                                    "overflow": "hidden",
+                                                    "textOverflow": "ellipsis",
+                                                    "whiteSpace": "normal",
+                                                    "WebkitLineClamp": "1",
+                                                    "lineHeight": "1.6rem"
+                                                }}>
+                                                    {description}
+                                                </Typography>
+                                            </TableCell>
+                                            <TableCell>
+                                                {status}
+                                            </TableCell>
+                                            <TableCell>
+                                                <IconButton
+                                                    size="large"
+                                                    color="inherit"
                                                 // onClick={(e) => {
                                                 //     setCurrentTag(
                                                 //         id
@@ -240,13 +284,13 @@ export default function ProductsHome() {
                                                 //         e
                                                 //     );
                                                 // }}
-                                            >
-                                                <MoreVertIcon fontSize="small" />
-                                            </IconButton>
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            })}
+                                                >
+                                                    <MoreVertIcon fontSize="small" />
+                                                </IconButton>
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                })}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -260,76 +304,14 @@ export default function ProductsHome() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
+
             <Dialog
                 open={openAddProduct}
                 onClose={handleCloseAddProduct}
                 maxWidth={"md"}
             >
                 <DialogTitle>Thêm một sản phẩm mới</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Tên sản phẩm"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="price"
-                        label="Giá sản phẩm"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="quantityProduct"
-                        label="Số lượng"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="description"
-                        label="Chi tiết sản phẩm "
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-                    {/* <FormControl fullWidth>
-                        <Field
-                            component={Select}
-                            id="type"
-                            name="type"
-                            labelId="age-simple"
-                            label="Loại câu hỏi"
-                        >
-                            {category.map((item) => (
-                                <MenuItem value={item.id}>{item.name}</MenuItem>
-                            ))}
-                        </Field>
-                    </FormControl> */}
-                    <Box
-                        noValidate
-                        component="form"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            m: "auto",
-                            width: "fit-content",
-                        }}
-                    ></Box>
-                </DialogContent>
+                <AddProductForm></AddProductForm>
                 <DialogActions>
                     <Button onClick={handleCloseAddProduct}>Close</Button>
                 </DialogActions>
@@ -396,71 +378,7 @@ export default function ProductsHome() {
                 maxWidth={"md"}
             >
                 <DialogTitle>Nhập dữ liệu sản phẩm để sửa </DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Tên sản phẩm"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="price"
-                        label="Giá sản phẩm"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="quantityProduct"
-                        label="Số lượng"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="description"
-                        label="Chi tiết sản phẩm "
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-                    {/* <FormControl fullWidth>
-                        <Field
-                            component={Select}
-                            id="type"
-                            name="type"
-                            labelId="age-simple"
-                            label="Loại câu hỏi"
-                        >
-                            {category.map((item) => (
-                                <MenuItem value={item.id}>{item.name}</MenuItem>
-                            ))}
-                        </Field>
-                    </FormControl> */}
-
-                    <Box
-                        noValidate
-                        component="form"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            m: "auto",
-                            width: "fit-content",
-                        }}
-                    ></Box>
-                </DialogContent>
+                <EditProductForm></EditProductForm>
                 <DialogActions>
                     <Button onClick={openEditProduct}>Close</Button>
                 </DialogActions>
