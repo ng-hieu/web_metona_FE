@@ -39,41 +39,34 @@ const columns = [
     {
         id: "image",
         label: "Ảnh sản phẩm",
-        minWidth: 150,
+        minWidth: 100,
         align: "left",
     },
     { id: "name", label: "Tên sản phẩm", minWidth: 200 },
     {
         id: "price",
         label: "Giá sản phẩm",
-        minWidth: 200,
+        minWidth: 170,
         align: "left",
         format: (value) => value.toLocaleString(),
     },
     {
         id: "quantity",
         label: "Số lượng",
-        minWidth: 200,
+        minWidth: 170,
         align: "left",
         format: (value) => value.toLocaleString(),
     },
     {
         id: "category",
         label: "Ngành hàng",
-        minWidth: 200,
-        align: "left",
-    },
-    {
-        id: "description",
-        label: "Mô tả",
-        minWidth: 300,
-        maxWidth:300,
+        minWidth: 170,
         align: "left",
     },
     {
         id: "status",
         label: "Tình trạng sản phẩm",
-        minWidth: 100,
+        minWidth: 170,
         align: "left",
     },
     {
@@ -85,25 +78,25 @@ const columns = [
 ];
 
 const rows = [
-    { id: 1, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'ádas1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111ádagsdasdad ádasdasd á ádasdasdsdfsdsdf sdf sdf sd fs df sdf sd fs df sdf s dfs df sdf sd fs dfs df sdf sd fs df sdf á d ád a sdasdasdaksldnasdfhslidfhalsdifasdf ádfsdfa <hr>  ádasdasdasdasdhjajsdabsdjasbdjabsdj kas ádja sads ádasdasdasdasdasdasdasddddddddddddddddddddddddđqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad' },
-    { id: 2, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', status:"cần thêm sản phẩm", image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 3, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 4, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 5, name: 'Canada', price: 23455233524, quantity: 37602103, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 6, name: 'Australia', price: 6745677457, quantity: 25475400, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 7, name: 'Germany', price: 432432454, quantity: 83019200, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 8, name: 'Ireland', price: 4453534, quantity: 4857000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 9, name: 'Mexico', price: 354566, quantity: 126577691, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 10, name: 'Japan', price: 7675567, quantity: 126317000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 11, name: 'France', price: 675765445, quantity: 67022000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 12, name: 'United Kingdom', price: 235234, quantity: 67545757, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 13, name: 'Russia', price: 5544, quantity: 146793744, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 14, name: 'Nigeria', price: 232334, quantity: 200962417, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 15, name: 'Brazil', price: 32543543, quantity: 210147125, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 16, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 17, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 18, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' },
-    { id: 19, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e',description: 'Đẹp' }
+    { id: 1, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 2, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', status: "cần thêm sản phẩm", image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 3, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 4, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 5, name: 'Canada', price: 23455233524, quantity: 37602103, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 6, name: 'Australia', price: 6745677457, quantity: 25475400, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 7, name: 'Germany', price: 432432454, quantity: 83019200, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 8, name: 'Ireland', price: 4453534, quantity: 4857000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 9, name: 'Mexico', price: 354566, quantity: 126577691, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 10, name: 'Japan', price: 7675567, quantity: 126317000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 11, name: 'France', price: 675765445, quantity: 67022000, category: 'Máy tính', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 12, name: 'United Kingdom', price: 235234, quantity: 67545757, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 13, name: 'Russia', price: 5544, quantity: 146793744, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 14, name: 'Nigeria', price: 232334, quantity: 200962417, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 15, name: 'Brazil', price: 32543543, quantity: 210147125, category: 'Sạc pin', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 16, name: 'India', price: 21213332, quantity: 1324171354, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 17, name: 'China', price: 345354253, quantity: 1403500365, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 18, name: 'Italy', price: 12125454354, quantity: 60483973, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' },
+    { id: 19, name: 'United States', price: 235243534345, quantity: 327167434, category: 'Điện thoại', image: 'https://firebasestorage.googleapis.com/v0/b/metona-website.appspot.com/o/logo.png?alt=media&token=5c44535d-0e25-4c76-b6cb-ba0128df9f6e' }
 ]
 
 export default function ProductHome() {
@@ -192,7 +185,7 @@ export default function ProductHome() {
         <>
             <Typography variant='h3' sx={{ width: '15vw', "marginLeft": "auto", "marginRight": "auto", color: theme.palette.primary.main }}>Bảng Sản Phẩm</Typography>
             <Button sx={{ border: `1px solid ${theme.palette.primary.main}` }} onClick={handleClickOpenAddProduct}>Thêm sản phẩm</Button>
-            <Paper sx={{ width: "97vw", overflow: "hidden" }}>
+            <Paper sx={{ width: '100%', overflow: "hidden" }}>
                 <TableContainer sx={{ maxHeight: 700 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -231,9 +224,8 @@ export default function ProductHome() {
                                         price,
                                         quantity,
                                         category,
-                                        description,
                                         status,
-                                     } = obj;
+                                    } = obj;
                                     return (
                                         <TableRow>
                                             <TableCell>
@@ -253,21 +245,6 @@ export default function ProductHome() {
                                             </TableCell>
                                             <TableCell>
                                                 {category}
-                                            </TableCell>
-                                            <TableCell>
-                                                <Typography sx={{
-                                                    "display": "-webkit-box",
-                                                    "maxHeight": "3.2rem",
-                                                    "maxWidth": "300px",
-                                                    "WebkitBoxOrient": "vertical",
-                                                    "overflow": "hidden",
-                                                    "textOverflow": "ellipsis",
-                                                    "whiteSpace": "normal",
-                                                    "WebkitLineClamp": "1",
-                                                    "lineHeight": "1.6rem"
-                                                }}>
-                                                    {description}
-                                                </Typography>
                                             </TableCell>
                                             <TableCell>
                                                 {status}
