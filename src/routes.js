@@ -3,8 +3,9 @@ import AdminLayout from './layouts/AdminLayout'
 import { Navigate, useRoutes, useSearchParams } from 'react-router-dom';
 import { ChildCare } from '@mui/icons-material';
 import { chipClasses } from '@mui/material';
-import AdminHome from './components/showProduct/AdminHome';
 import LoginPage from './pages/AdminPages/LoginPage';
+import ProductsHome from './components/adminHome/ProductsHome';
+import CategoriesHome from './components/adminHome/CategoriesHome';
 
 export default function Router() {
     return useRoutes([
@@ -12,7 +13,8 @@ export default function Router() {
             path: 'admin',
             element: <AdminLayout/>,
             children: [
-                { path: 'home', element: <AdminHome/>}
+                { path: 'products', element: <ProductsHome/>},
+                { path: 'categories', element: <CategoriesHome /> }
             ]
         },
         {path:'login', element: <LoginPage/>}

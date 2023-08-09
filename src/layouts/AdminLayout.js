@@ -15,9 +15,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Outlet } from 'react-router-dom';
 import { Avatar, Grid, Stack, Typography } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import CategoryTwoToneIcon from '@mui/icons-material/CategoryTwoTone'; import { Outlet } from 'react-router-dom';
+import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
+import ListAltTwoToneIcon from '@mui/icons-material/ListAltTwoTone';
+import ProductionQuantityLimitsTwoToneIcon from '@mui/icons-material/ProductionQuantityLimitsTwoTone';
 
 const drawerWidth = 240;
 
@@ -67,6 +70,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function AdminLayout() {
+    const navigate = useNavigate()
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -77,6 +81,10 @@ export default function AdminLayout() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const arrFeatures = ['Xem ngành hàng', 'Xem sản phẩm', 'Kiểm tra đơn hàng', 'Tra cứu khách hàng']
+    const arrIcon = [<CategoryTwoToneIcon />, <ListAltTwoToneIcon />, <ProductionQuantityLimitsTwoToneIcon />, <PersonSearchTwoToneIcon />]
+    const navigatePages = ["/admin/categories", "/admin/products", "/admin/#", "/admin/#" ]
 
     return (
         <>
@@ -127,14 +135,16 @@ export default function AdminLayout() {
                     </DrawerHeader>
                     <Divider />
                     <List>
-                        <ListItem >
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <InboxIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Inbox" />
-                            </ListItemButton>
-                        </ListItem>
+                        {arrFeatures.map((text, index) => (
+                            <ListItem key={text} disablePadding >
+                                <ListItemButton onClick={() => navigate(navigatePages[index])}>
+                                    <ListItemIcon>
+                                        {arrIcon[index]}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
                     </List>
                 </Drawer>
                 <Main open={open}>
