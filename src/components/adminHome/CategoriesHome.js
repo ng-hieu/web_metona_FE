@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
 import Typography from "@mui/material/Typography";
 import { useTheme } from '@emotion/react';
+import { Helmet } from 'react-helmet';
 
 
 const columns = [
@@ -70,6 +71,11 @@ export default function CategoriesHome() {
 
     return (
         <>
+        <Helmet>
+            <Typography>
+                Hello
+                </Typography>
+        </Helmet>
             <Typography variant='h3' sx={{ width: '15vw', "marginLeft": "auto", "marginRight": "auto", color: theme.palette.primary.main }}>Bảng Ngành Hàng</Typography>
             <Button sx={{ border: `1px solid ${theme.palette.primary.main}` }}>Thêm ngành hàng</Button>
             <Paper sx={{ width: '25vw', overflow: 'hidden', marginLeft: "auto", marginRight: "auto" }}>
